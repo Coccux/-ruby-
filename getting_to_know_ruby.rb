@@ -55,3 +55,17 @@ os_command = $stdin.gets.chomp
 # Выполнение команды ОС 
 puts "Результат выполнения команды ОС:"
 system(os_command)
+
+# Задание 4:  Работа с числами
+
+# Пример использования:
+number = 36
+
+# Метод 1: Найти количество делителей числа, не делящихся на 3
+def count_divisors_not_divisible_by_3(number)
+  divisors = (1..number).select { |div| number % div == 0 }  # Находим все делители числа
+  divisors_not_divisible_by_3 = divisors.reject { |div| div % 3 == 0 }  # Убираем те, что делятся на 3
+  divisors_not_divisible_by_3.count
+end
+# Метод 1
+puts "Количество делителей числа #{number}, не делящихся на 3: #{count_divisors_not_divisible_by_3(number)}"
