@@ -69,3 +69,18 @@ def count_divisors_not_divisible_by_3(number)
 end
 # Метод 1
 puts "Количество делителей числа #{number}, не делящихся на 3: #{count_divisors_not_divisible_by_3(number)}"
+
+
+# Метод 2: Найти минимальную нечетную цифру числа
+def find_min_odd_digit(number)
+  digits = number.to_s.chars.map(&:to_i)  # Преобразуем число в массив его цифр
+  odd_digits = digits.select(&:odd?)  # Отбираем только нечетные цифры
+  odd_digits.min  # Возвращаем минимальную нечетную цифру, если такие есть
+end
+# Метод 2
+min_odd_digit = find_min_odd_digit(number)
+if min_odd_digit.nil?
+  puts "В числе #{number} нет нечетных цифр."
+else
+  puts "Минимальная нечетная цифра числа #{number}: #{min_odd_digit}"
+end
