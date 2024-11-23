@@ -3,15 +3,15 @@ class Student
   attr_accessor :id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :git
   
   # Конструктор
-  def initialize(last_name, first_name, middle_name, id = nil, phone = nil, telegram = nil, email = nil, git = nil)
-    @id = id
+  def initialize(last_name:, first_name:, middle_name:, **options)
+    @id = options[:id]
     @last_name = last_name
     @first_name = first_name
     @middle_name = middle_name
-    @phone = phone
-    @telegram = telegram
-    @email = email
-    @git = git
+    @phone = options[:phone]
+    @telegram = options[:telegram]
+    @email = options[:email]
+    @git = options[:git]
   end
 
 
