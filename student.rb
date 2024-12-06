@@ -1,6 +1,8 @@
 class Student
-  # Встроенный механизм , который автоматически создаёт геттеры и сеттеры
-  attr_accessor :id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :git
+  
+  attr_reader :phone, :telegram, :emale
+  
+  attr_accessor :id, :last_name, :first_name, :middle_name, :git
   
   # Конструктор
   def initialize(**options)
@@ -8,14 +10,45 @@ class Student
     self.last_name = options[:last_name] || 'Не указано'
     self.first_name = options[:first_name] || 'Не указано'
     self.middle_name = options[:middle_name] || 'Не указано'
-    self.phone = options[:phone]
-    self.telegram = options[:telegram]
-    self.email = options[:email]
     self.git = options[:git]
 	
-	validate
+	set_contacts(phone: options[:phone], telegram: options[:telegram], email: options[:email])
+	
+	
   end
 
+
+  def set_contacts(phone: nil, telegram: nil, email: nil)
+    validate_contact(phone: phone, telegram: telegram, email: email)
+
+    @phone = phone
+    @telegram = telegram
+    @email = email
+  end
+
+
+  def contacts
+	{
+	  phone: @phone || 'не указан',
+      telegram: @telegram || 'не указан',
+      email: @email || 'не указан'
+    }
+  end
+  
+  
+  def validate_contact(phone:, telegram:, email:)
+    if phone.nil? && telegram.nil? && email.nil?
+      raise ArgumentError, 'Не указано ни одного контакта для связи (телефон, Telegram или email)'
+    end
+
+    raise ArgumentError, "Некорректный номер телефона: #{phone}" unless phone.nil? || Student.valid_phone?(phone)
+    raise ArgumentError, "Некорректный Telegram: #{telegram}" unless telegram.nil? || Student.valid_telegram?(telegram)
+    raise ArgumentError, "Некорректный email: #{email}" unless email.nil? || Student.valid_email?(email)
+  end  
+  
+  
+
+  
 
   def self.valid_id?(id)
 	id.nil? || (id.is_a?(Integer) && id > 0)
@@ -26,7 +59,7 @@ class Student
   end
   
   def self.valid_phone?(phone)
-	phone.is_a?(String) && phone.match?(/\A+7[0-9_]{10,}\z/)
+	phone.is_a?(String) && phone.match?(/\A\+7[\d\s\-()]{10,15}\z/)
   end 
   
   def self.valid_telegram?(telegram)
@@ -69,18 +102,6 @@ class Student
     @middle_name = middle_name
   end
 
-  def telegram=(telegram)
-    raise ArgumentError, "Некорректный Telegram: #{telegram}" unless Student.valid_telegram?(telegram)
-
-    @telegram = telegram
-  end
-
-  def email=(email)
-    raise ArgumentError, "Некорректный email: #{email}" unless Student.valid_email?(email)
-
-    @email = email
-  end
-
   def git=(git)
     raise ArgumentError, "Некорректный Git: #{git}" unless Student.valid_git?(git)
 
@@ -88,30 +109,12 @@ class Student
   end
 
 
-
-  def validate
-    validate_git_presence
-    validate_contact_presence
-  end
-
-  def validate_git_presence
-    raise ArgumentError, 'Git-ссылка отсутствует' if git.nil? || git.strip.empty?
-  end
-
-  def validate_contact_presence
-    if (phone.nil? || phone.strip.empty?) &&
-       (telegram.nil? || telegram.strip.empty?) &&
-       (email.nil? || email.strip.empty?)
-      raise ArgumentError, 'Не указано ни одного контакта для связи (телефон, Telegram или email)'
-    end
-  end
-
-  
-  
-  
   
   # Метод для вывода информации о студенте
   def to_s
-    "ID: #{id || 'не указан'}, ФИО: #{last_name} #{first_name} #{middle_name}, Телефон: #{phone || 'не указан'}, Telegram: #{telegram || 'не указан'}, Email: #{email || 'не указан'}, Git: #{git || 'не указан'}"
+    "ID: #{id || 'не указан'}, ФИО: #{last_name} #{first_name} #{middle_name}, Контакты #{contacts} Git: #{git || 'не указан'}"
   end
+  
+  private
+  attr_writer :phone, :telegram, :email
 end
