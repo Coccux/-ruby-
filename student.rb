@@ -13,7 +13,7 @@ class Student
     self.email = options[:email]
     self.git = options[:git]
 	
-	
+	validate
   end
 
 
@@ -89,6 +89,22 @@ class Student
 
 
 
+  def validate
+    validate_git_presence
+    validate_contact_presence
+  end
+
+  def validate_git_presence
+    raise ArgumentError, 'Git-ссылка отсутствует' if git.nil? || git.strip.empty?
+  end
+
+  def validate_contact_presence
+    if (phone.nil? || phone.strip.empty?) &&
+       (telegram.nil? || telegram.strip.empty?) &&
+       (email.nil? || email.strip.empty?)
+      raise ArgumentError, 'Не указано ни одного контакта для связи (телефон, Telegram или email)'
+    end
+  end
 
   
   
