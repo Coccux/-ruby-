@@ -14,7 +14,7 @@ class Student
 	
 	set_contacts(phone: options[:phone], telegram: options[:telegram], email: options[:email])
 	
-	
+	validate
   end
 
 
@@ -36,6 +36,30 @@ class Student
   end
   
   
+  def initials
+	"#{last_name} #{first_name[0]}.#{middle_name[0]}."
+  end
+  
+  def primary_contact
+	if phone
+      "Телефон: #{phone}"
+    elsif telegram
+      "Telegram: #{telegram}"
+    elsif email
+      "Email: #{email}"
+    else
+      'Нет контактов'
+    end
+  end
+  
+  def get_info
+	"@{initials}, Git: #{git || 'не указан'}, Связь: #{primary_contact}"
+  end
+  
+  
+  private
+  attr_writer :phone, :telegram, :email
+  
   def validate_contact(phone:, telegram:, email:)
     if phone.nil? && telegram.nil? && email.nil?
       raise ArgumentError, 'Не указано ни одного контакта для связи (телефон, Telegram или email)'
@@ -45,11 +69,28 @@ class Student
     raise ArgumentError, "Некорректный Telegram: #{telegram}" unless telegram.nil? || Student.valid_telegram?(telegram)
     raise ArgumentError, "Некорректный email: #{email}" unless email.nil? || Student.valid_email?(email)
   end  
-  
-  
 
-  
+  def validate
+    validate_git_presence
+    validate_contact_presence
+  end
 
+  def validate_git_presence
+    raise ArgumentError, 'Git-ссылка отсутствует' if git.nil? || git.strip.empty?
+  end
+  
+  def validate_git_presence
+    raise ArgumentError, 'Git-ссылка отсутствует' if git.nil? || git.strip.empty?
+  end
+  
+  def validate_contact_presence
+    if (phone.nil? || phone.strip.empty?) &&
+       (telegram.nil? || telegram.strip.empty?) &&
+       (email.nil? || email.strip.empty?)
+      raise ArgumentError, 'Не указано ни одного контакта для связи (телефон, Telegram или email)'
+    end
+  end
+  
   def self.valid_id?(id)
 	id.nil? || (id.is_a?(Integer) && id > 0)
   end
@@ -115,6 +156,4 @@ class Student
     "ID: #{id || 'не указан'}, ФИО: #{last_name} #{first_name} #{middle_name}, Контакты #{contacts} Git: #{git || 'не указан'}"
   end
   
-  private
-  attr_writer :phone, :telegram, :email
 end
