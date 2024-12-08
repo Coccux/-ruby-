@@ -1,17 +1,18 @@
 require_relative 'student'
-# Создание объектов студентов
-student1 = Student.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович', 
+# Создание из объектов Student 
+student = Student.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович',
+                      id: 1, phone: '+7 123 456-78-90', git: 'github.com/ivan')
 
-id: 1, phone: '+7 123 456-78-90', email: 'ivanov@mail.com', git: 'github.com/ivan',telegram: '@ivanov')
+student_short = StudentShort.new(student)
+puts student_short.id                 
+puts student_short.last_name_initials 
+puts student_short.git                
+puts student_short.contact     
 
-student2 = Student.new(last_name: 'Петров', first_name: 'Петр', middle_name: 'Петрович', 
-git: 'github.com/petr', phone: '+7 123 456-78-90', email: 'ivanov@mail.com')
-
-student3 = Student.new(last_name: 'Сидоров', first_name: 'Сидор', middle_name: 'Сидорович', 
-
-git: 'github.com/sidorov', phone: '+7 123 456-78-90', id: 23, email: 'ivanov@mail.com')
-
-# Вывод информации о студентах
-puts student1
-puts student2
-puts student3
+# Создание из ID и строки
+data = 'Иванов И.И., github.com/ivan, Телефон:+71234567890'
+student_short = StudentShort.new(1, data)
+puts student_short.id                 
+puts student_short.last_name_initials 
+puts student_short.git                
+puts student_short.contact            
