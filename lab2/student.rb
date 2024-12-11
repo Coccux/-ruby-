@@ -9,16 +9,22 @@ class Student
   end
 
   def self.from_string(str)
-    data = str.scan(/ID:\s*(\d+)|Имя:\s*([\w\s.]+)|Git:\s*(\S+)|Контакт:\s*(\S+)/)
-               .map(&:compact)
-               .to_h
-    raise ArgumentError, 'Не хватает данных для создания объекта' if data.values.size < 4
+  
+    id = str[/ID:\s*(\d+)/, 1]&.to_i
+    last_name_initials = str[/Имя:\s*([^,]+)/, 1]&.strip
+    git = str[/Git:\s*([^,]+)/, 1]&.strip
+    contact = str[/Контакт:\s*(\S+)/, 1]
+	
+	if id.nil? || last_name_initials.nil? || git.nil? || contact.nil?
+		raise ArgumentError, 'Не хватает данных для создания объекта' 
 
+  end
+  
     StudentShort.new(
-      id: data['ID'].to_i,
-      last_name_initials: data['Имя'],
-      git: data['Git'],
-      contact: data['Контакт']
+      id: id,
+	  last_name_initials: last_name_initials,
+	  git: git,
+	  contact: contact
     )
   end
 end

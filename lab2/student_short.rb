@@ -1,7 +1,7 @@
 require_relative 'Student'
 
 class StudentShort < Student
-  attr_reader :contact, :last_name_initials
+  attr_reader :contact, :last_name_initials, :git
 
   def initialize(id:, last_name_initials:, git:, contact:)
     @id = validate_id?(id)
@@ -15,19 +15,19 @@ class StudentShort < Student
     id
   end
 
-  # Валидация фамилии и инициалов
+  
   def validate_last_name_initials?(full_name)
     raise ArgumentError, "Некорректный формат фамилии и инициалов: #{full_name}" unless full_name =~ /^[А-ЯЁ][а-яё]+\s[А-ЯЁ]\.[А-ЯЁ]\.$/
     full_name
   end
 
-  # Валидация ссылки на Git
+  
   def validate_git?(git_url)
-    raise ArgumentError, "Некорректный формат Git-репозитория: #{git_url}" unless git_url =~ /?github\.com\/\w+$/
+    raise ArgumentError, "Некорректный формат Git-репозитория: #{git_url}" unless git_url =~ /^github\.com\/\S+$/
     git_url
   end
 
-  # Валидация контактов (телефон, Telegram, email)
+  
   def validate_contact?(contact_info)
     case contact_info
     when /^\+?\d{10,15}$/
@@ -41,7 +41,7 @@ class StudentShort < Student
     end
   end
 
-  # Определение типа контакта
+  
   def contact_type
     if contact.start_with?('+')
       'телефон'
@@ -54,7 +54,7 @@ class StudentShort < Student
     end
   end
 
-  # Метод для получения краткой информации
+  
   def get_info
     "#{last_name_initials}; Git: #{git}; #{contact_type.capitalize}: #{contact}"
   end
