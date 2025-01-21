@@ -51,6 +51,13 @@ class Student
 			raise ArgumentError, "Некорректный формат GitHub URL"
 		end
 	end
+	def validate_git
+		if @git!=nil
+			true
+		else  
+			raise "ytn ubnf"
+		end
+	end   
 
 	def surname=(valid_surname)
 		if valid_surname.match?(/^[а-яА-ЯёЁa-zA-Z]+$/)
@@ -76,6 +83,13 @@ class Student
 		end
 	end
 	
+	def validate_contacts
+		if @email!=nil || @telegram!=nil || @number_phone!=nil
+			true
+		else  
+			false
+		end
+	end 
 	
 	def print_info
 		puts "\nID студента: #{@id}" if @id
