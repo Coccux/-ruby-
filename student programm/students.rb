@@ -65,4 +65,11 @@ class Student
 		@git
 	end  
 	
+	def print_info
+		puts ("\nID студента: #{@id}\nФИО: #{@surname} #{@name} #{@patronymic}")
+		puts ("Номер телефон: #{@number_phone}") if @number_phone  
+		puts ("Телеграмм: #{@telegram}") if @telegram 
+		puts ("Почта: #{@email}") if @email 
+		puts ("Гит: #{@git}") if @git 
+  end
 end
