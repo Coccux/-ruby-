@@ -91,6 +91,12 @@ class Student
 		end
 	end 
 	
+	def set_contacts(number_phone: nil, telegram: nil, email: nil)
+		self.number_phone = number_phone if number_phone
+		self.telegram = telegram if telegram
+		self.email = email if email
+	end
+	
 	def print_info
 		puts "\nID студента: #{@id}" if @id
 		puts "ФИО: #{@surname} #{@name} #{@patronymic}" if @surname && @name && @patronymic

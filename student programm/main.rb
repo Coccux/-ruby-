@@ -12,3 +12,7 @@ stud=Student.new(
 )
 
 stud.print_info
+
+stud.set_contacts(number_phone: "12345678901", telegram: nil, email: "new_email@example.com")
+
+stud.print_info
