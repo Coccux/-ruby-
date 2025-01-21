@@ -11,8 +11,8 @@ stud=Student.new(
 	git: "github.com/ivanov"
 )
 
-puts stud.getinfo
+puts stud.print_info
 
-stud.set_contacts(number_phone: "12345678901", telegram: nil, email: "new_email@example.com")
+stud.set_contacts(number_phone: "12345678901", telegram: nil, email: "email@example.com")
 
-stud.print_info
+puts stud.print_info

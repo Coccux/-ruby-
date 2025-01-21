@@ -1,19 +1,28 @@
-class Student_short
-	attr_reader :id, :fullname, :git, :contact 
+require_relative 'super_class_student'
+class Student_short < Super_class_student
 	
-	private
-	def initialize(id: nil, fullname: , git: nil, contact: nil)
-		@id = id
-		@fullname = fullname
-		@git = git
-		@contact = contact
-	end 
-	
-	def self.info_student(student)
-		new(id:student.id, fullname:student.full_name, git: student.get_git(), contact: student.get_contacts() )
-	end 
-  
-	def self.info_id_and_string(id: string:)
-		new(id: id, string: getinfo())
+	def self.about_student(student)
+		new(id: student.id, git: student.git, fullname: student.fullname, contact: student.contact)
+	end  
+
+	def self.from_sting(id:,string:)
+		fullname, contact, git= read_info_from_string(string)
+		new(id: id, fullname:fullname, contact:contact, git:git)
 	end
+  
+	def  self.read_info_from_string(string)
+		fullname,contact,git = string.split(', ')
+		return fullname,contact,git
+	end  
+  
+	def print_info
+		"\nID: #{@id} \nfullname: #{@fullname} \nGit: #{@git} \nContact: #{@contact}"
+	end
+
+	private
+    def initialize(id: nil, fullname:nil , git: nil, contact: nil)
+		super(id: id, git: git)
+		@fullname = fullname
+		@contact = contact
+    end 
 end
