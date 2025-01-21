@@ -6,12 +6,17 @@ class Student
 		@surname = attributes[:surname]
 		@name = attributes[:name]
 		@patronymic = attributes[:patronymic]
-		@number_phone = attributes[:number_phone]
+		self.valid_number = attributes[:number_phone]
 		@telegram = attributes[:telegram]
 		@email = attributes[:email]
 		@git = attributes[:git]
 	end
 
+	def valid_number=(valid_number)
+		if valid_number.match?(/^\d{11}$/)
+			@number_phone = valid_number
+		end
+	end
 	
 	def print_info
 		puts "\nID студента: #{@id}" if @id
@@ -20,5 +25,5 @@ class Student
 		puts "Телеграмм: #{@telegram}" if @telegram 
 		puts "Почта: #{@email}" if @email 
 		puts "Гит: #{@git}" if @git 
-  end
+	end
 end
