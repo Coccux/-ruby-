@@ -84,11 +84,7 @@ class Student
 	end
 	
 	def validate_contacts
-		if @email!=nil || @telegram!=nil || @number_phone!=nil
-			true
-		else  
-			false
-		end
+		@git!=nil && @email!=nil || @telegram!=nil || @number_phone!=nil
 	end 
 	
 	def set_contacts(number_phone: nil, telegram: nil, email: nil)
@@ -97,12 +93,35 @@ class Student
 		self.email = email if email
 	end
 	
+	def full_name
+		"#{@surname} #{@name[0]}. #{@patronymic[0]}."
+	end
+	
+	def get_git()
+		"#{"Git:  #{@git} "}"
+	end
+  
+	def contact_info
+		if @telegram
+			"Telegram: #{@telegram}"
+		elsif @email
+			"Email: #{@email}"
+		elsif @number_phone
+			"Phone: #{@number_phone}"
+		else
+			"No contact info available"
+		end
+	end
+	
+	def getinfo()
+		"#{full_name}," " #{contact_info()}" " #{get_git}"
+	end
+  
 	def print_info
-		puts "\nID студента: #{@id}" if @id
-		puts "ФИО: #{@surname} #{@name} #{@patronymic}" if @surname && @name && @patronymic
-		puts "Номер телефон: #{@number_phone}" if @number_phone  
-		puts "Телеграмм: #{@telegram}" if @telegram 
-		puts "Почта: #{@email}" if @email 
-		puts "Гит: #{@git}" if @git 
+		"\nID: #{@id}\nФИО: #{full_name()}  
+		#{"\nНомер телфона: #{@number_phone}" if @number_phone} 
+		#{"\nПочта: #{@email}" if @email} 
+		#{"\nТелеграм: #{@telegram}" if @telegram} 
+		#{"\nGit: #{@git}" if @git}"
 	end
 end
