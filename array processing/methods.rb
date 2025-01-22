@@ -9,3 +9,7 @@ end
 def find_two_smallest(arr, &block)
 	block.call(arr)
 end
+
+def find_closest_to_r(arr, r, &block)
+  block.call(arr, r)
+end

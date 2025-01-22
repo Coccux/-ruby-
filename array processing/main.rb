@@ -28,7 +28,16 @@ when 1
 when 2
 	arr = data.map(&:to_i)
 	result = find_two_smallest(arr) do |array|
-		array.min(2)
+		array.uniq.min(2)
 	end
 	puts "Два наименьших элемента: #{result}"
+	
+when 3
+	puts "Введите значение R:"
+	r = gets.to_i
+	arr = data.map(&:to_i)
+	result = find_closest_to_r(arr, r) do |array, r|
+		array.min_by { |element| (element - r).abs }
+	end
+	puts "Элемент, ближайший к #{r}: #{result}"
 end
