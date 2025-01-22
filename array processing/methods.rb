@@ -5,3 +5,7 @@ end
 def find_unique_element(arr, &block)
 	block.call(arr)
 end
+
+def find_two_smallest(arr, &block)
+	block.call(arr)
+end

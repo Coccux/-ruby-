@@ -25,4 +25,10 @@ when 1
 	end
 	puts "Уникальный элемент: #{result}"
 
+when 2
+	arr = data.map(&:to_i)
+	result = find_two_smallest(arr) do |array|
+		array.min(2)
+	end
+	puts "Два наименьших элемента: #{result}"
 end
