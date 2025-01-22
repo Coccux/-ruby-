@@ -13,3 +13,7 @@ end
 def find_closest_to_r(arr, r, &block)
   block.call(arr, r)
 end
+
+def find_positive_divisors(number, &block)
+  block.call(number)
+end

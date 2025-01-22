@@ -40,4 +40,12 @@ when 3
 		array.min_by { |element| (element - r).abs }
 	end
 	puts "Элемент, ближайший к #{r}: #{result}"
+	
+when 4
+	puts "Введите число для нахождения делителей:"
+	number = gets.to_i
+	result = find_positive_divisors(number) do |num|
+		(1..num).select { |i| num % i == 0 }
+	end
+	puts "Положительные делители числа #{number}: #{result}"
 end
