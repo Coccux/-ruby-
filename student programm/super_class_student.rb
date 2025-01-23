@@ -1,5 +1,5 @@
 class Super_class_student
-	attr_accessor :id, :git
+	attr_reader :id, :git
 	
 	def initialize(id:nil,git:nil,number_phone:nil,telegram:nil,email:nil)
 		self.id = id if id
