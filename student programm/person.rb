@@ -1,16 +1,19 @@
 class Person
-    attr_reader :id, :git
-
-    def validate_git?
-        !self.git.nil?
+    attr_reader :git
+	attr_accessor :id
+	
+	def initialize(id: nil)
+		self.id = id
+	end
+	
+	def git=(git)
+        unless self.class.valid_git?(git)
+            raise ArgumentError, "Wrong git link format"
+        end
+        @git = git
     end
-
-    def validate?
-        self.validate_git?
-    end
-
+	
     protected
-
 
     def self.valid_phone_number?(phone_number)
         phone_number.nil? || phone_number =~ /^(?:\+7|8)[\s-]?(?:\(?\d{3}\)?[\s-]?)\d{3}[\s-]?\d{2}[\s-]?\d{2}$/
@@ -23,20 +26,16 @@ class Person
     def self.valid_git?(git)
         git.nil? || git =~ %r{^github\.com/[a-zA-Z0-9_\-]+$}
     end
-
+	
+	def self.valid_id?(id)
+		id.nil? || id =~ /^\d+$/
+	end
     def self.valid_email?(email)
         email.nil? || email =~ /^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     end
 
     def self.valid_name?(name)
-        name =~ /^[А-ЯЁ][а-яё]{1,}(-[А-ЯЁ][а-яё]{1,})?$/
+        name =~ /^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?$/
     end
-
-    def git=(git)
-        unless self.class.valid_git?(git)
-            raise ArgumentError, "Wrong git link format"
-        end
-        @git = git
-    end
-
+	
 end

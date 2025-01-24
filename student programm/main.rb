@@ -14,16 +14,17 @@ student = Student.new(
 	email: "ivanov@example.com",
 	git: "github.com/ivanov"
 )
-puts student.to_s
-puts student.get_info
-puts student.get_any_contact
-puts "Student valid? #{student.validate_contacts?}"
+# puts student.to_s
+# puts student.get_info
+# puts student.get_any_contact
 
-student.set_contacts(number_phone: "12345678901", telegram: nil, email: "email@example.com")
 
-puts student.to_s
+# student.set_contacts(phone_number: "+71234567899", telegram: "@example", email: "email@example.com")
 
-sh = Student_short.new_from_student_obj(student)
+# puts student.to_s
+
+sh = Student_short.from_string(id: 2, string: "Ива8ов 4.И., telegram: @рарnov, github.com/ivanov")
+
 puts sh.id
 puts sh.full_name
 puts sh.git

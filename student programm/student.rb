@@ -2,10 +2,10 @@ require_relative 'person.rb'
 
 class Student < Person
     attr_reader :first_name, :name, :patronymic, :telegram, :email, :phone_number
-    attr_writer :id
+    
 
-    def initialize(first_name:, name:, patronymic:, id: nil, telegram: nil, phone_number: nil, email: nil, git: nil)
-        self.id = id
+    def initialize(first_name:, name:, patronymic:, id:, telegram:, phone_number: nil, email: nil, git:)
+        super(id: id)
         self.first_name = first_name
         self.name = name
         self.patronymic = patronymic
@@ -13,8 +13,8 @@ class Student < Person
         self.set_contacts(email: email, telegram: telegram, phone_number: phone_number)
     end
 
-    def to_s 
-        "#{"ID: #{self.id}\n" unless self.id.nil?}First Name: #{ self.first_name }\nName: #{ self.name }\nPatronymic: #{ self.patronymic }\n#{"Phone Number: #{ self.phone_number }\n" unless self.phone_number.nil?}#{"Telegram: #{ self.phone_number }\n" unless self.telegram}#{"Email: #{ self.email }\n" unless self.email.nil?}#{"Git: #{ self.git }\n" unless self.git.nil?}"
+    def to_s
+        "#{"ID: #{self.id}\n" unless self.id.nil?}First Name: #{ self.first_name }\nName: #{ self.name }\nPatronymic: #{ self.patronymic }\n#{"Phone Number: #{ self.phone_number }\n" unless self.phone_number.nil?}#{"Telegram: #{ self.telegram }\n" unless self.telegram}#{"Email: #{ self.email }\n" unless self.email.nil?}#{"Git: #{ self.git }\n" unless self.git.nil?}"
     end
 
     def get_info
@@ -22,8 +22,15 @@ class Student < Person
     end
 
     def get_full_name
-        "full_name: #{self.first_name} #{self.name[0]}.#{self.patronymic[0]}."
-    end
+
+		unless self.class.valid_name?(self.first_name) &&
+			   self.class.valid_name?(self.name) &&
+			   self.class.valid_name?(self.patronymic)
+			raise ArgumentError, "One or more name fields are invalid"
+		end
+
+		"full_name: #{self.first_name} #{self.name[0]}.#{self.patronymic[0]}."
+	end
 
     def get_any_contact
         if telegram then
@@ -35,14 +42,7 @@ class Student < Person
         end
     end
 
-    def validate_contacts?
-        !self.telegram.nil? || !self.email.nil? || !self.phone_number.nil?
-    end
-
-    def validate?
-        super && self.validate_contacts?
-    end
-
+    
 	def set_contacts(contacts)
         unless self.class.valid_phone_number?(contacts[:phone_number])
             raise ArgumentError, "Wrong phone number format"
