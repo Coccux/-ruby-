@@ -1,9 +1,6 @@
 require_relative 'person.rb'
 
 class Student_short < Person
-    
-	attr_accessor :contact, :full_name
-    private_class_method :new
 
     def initialize(full_name:, git:, contact:, id:)
         super(id: id)
@@ -31,4 +28,14 @@ class Student_short < Person
 		return full_name,contact,git
 	end 
     
+	private_class_method :new
+
+	def to_s
+		details = []
+		details << "ID: #{@id}" if @id
+		details << "full name: #{@full_name}"
+		details << "GitHub: #{@git}" if @git
+		details << "Contacts: #{@contact}" if @contact
+		details.join("\n")
+	end
 end

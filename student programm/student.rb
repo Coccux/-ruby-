@@ -1,47 +1,65 @@
 require_relative 'person.rb'
 
 class Student < Person
-    attr_reader :first_name, :name, :patronymic, :telegram, :email, :phone_number
+    attr_reader :telegram, :email, :phone_number
     
 
     def initialize(first_name:, name:, patronymic:, id:, telegram:, phone_number: nil, email: nil, git:)
-        super(id: id)
-        self.first_name = first_name
-        self.name = name
-        self.patronymic = patronymic
-        self.git = git
         self.set_contacts(email: email, telegram: telegram, phone_number: phone_number)
+		super(first_name: first_name, name: name, patronymic: patronymic, git: git, id: id, contact: contact)
     end
 
-    def to_s
-        "#{"ID: #{self.id}\n" unless self.id.nil?}First Name: #{ self.first_name }\nName: #{ self.name }\nPatronymic: #{ self.patronymic }\n#{"Phone Number: #{ self.phone_number }\n" unless self.phone_number.nil?}#{"Telegram: #{ self.telegram }\n" unless self.telegram}#{"Email: #{ self.email }\n" unless self.email.nil?}#{"Git: #{ self.git }\n" unless self.git.nil?}"
-    end
 
-    def get_info
-        "#{get_full_name}, git: #{self.git}, #{get_any_contact}"
-    end
-
-    def get_full_name
-
-		unless self.class.valid_name?(self.first_name) &&
-			   self.class.valid_name?(self.name) &&
-			   self.class.valid_name?(self.patronymic)
-			raise ArgumentError, "One or more name fields are invalid"
+	private def phone_number=(phone_number)
+		if phone_number.nil? || Student.phone_valid?(phone_number)
+			@phone_number = phone_number
+		else
+			raise ArgumentError, "Неверный телефон: #{id} #{surname} #{name}"
 		end
-
-		"full_name: #{self.first_name} #{self.name[0]}.#{self.patronymic[0]}."
 	end
 
-    def get_any_contact
-        if telegram then
-            "telegram: #{self.telegram}"
-        elsif email
-            "email: #{self.email}"
-        elsif phone_number
-            "phone_number: #{self.phone_number}"
-        end
+	private def telegram=(telegram)
+		if telegram.nil? || Student.telegram_valid?(telegram)
+			@telegram = telegram
+		else
+			raise ArgumentError, "Неверный Telegram: #{id} #{surname} #{name}"
+		end
+	end
+
+	private def email=(email)
+		if email.nil? || Student.email_valid?(email)
+			@email = email
+		else
+			raise ArgumentError, "Неверный адрес электронной почты: #{id} #{surname} #{name}"
+		end
+	end
+	
+	
+	def self.valid_phone_number?(phone_number)
+        phone_number.nil? || phone_number =~ /^(?:\+7|8)[\s-]?(?:\(?\d{3}\)?[\s-]?)\d{3}[\s-]?\d{2}[\s-]?\d{2}$/
     end
 
+    def self.valid_telegram?(telegram)
+        telegram.nil? || telegram =~ /@[a-zA-Z0-9_]{5,}$/
+    end
+	
+    def self.valid_email?(email)
+        email.nil? || email =~ /^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    end
+	
+	
+	def to_s
+		details = []
+		details << super
+		details << "Phone: #{@phone_number}" if @phone_number
+		details << "Telegramm: #{@telegram}" if @telegram
+		details << "Mail: #{@email}" if @email
+		details.join("\n")
+	end
+	
+	def get_info
+        "#{get_full_name}, git: #{self.git}, #{self.contact}"
+    end
     
 	def set_contacts(contacts)
         unless self.class.valid_phone_number?(contacts[:phone_number])
@@ -60,27 +78,4 @@ class Student < Person
         @email = contacts[:email]
     end
 	
-    private
-
-    def first_name=(first_name)
-        unless self.class.valid_name?(first_name)
-            raise ArgumentError, "Wrong first name format"
-        end
-        @first_name = first_name
-    end
-
-    def name=(name)
-        unless self.class.valid_name?(name)
-            raise ArgumentError, "Wrong name format"
-        end
-        @name = name
-    end
-
-    def patronymic=(patronymic)
-        unless self.class.valid_name?(patronymic)
-            raise ArgumentError, "Wrong patronymic format"
-        end
-        @patronymic = patronymic
-    end
-
 end
