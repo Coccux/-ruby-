@@ -53,7 +53,7 @@ class Person
         git.nil? || git =~ %r{^github\.com/[a-zA-Z0-9_\-]+$}
     end
 	def self.valid_id?(id)
-		id.nil? || id =~ /^\d+$/
+		id.nil? || (id.is_a?(Integer) && id.positive?)
 	end
     def self.valid_name?(name)
         name =~ /^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?$/
@@ -68,6 +68,10 @@ class Person
 		end
 
 		"full_name: #{self.first_name} #{self.name[0]}.#{self.patronymic[0]}."
+	end
+	
+	def get_contact 
+		"#{phone || telegram || email}"
 	end
 	
 	def git_null?

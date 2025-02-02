@@ -1,12 +1,13 @@
 require_relative 'person.rb'
-
+require_relative 'binary_tree'
 class Student < Person
-    attr_reader :telegram, :email, :phone_number
+    attr_reader :telegram, :email, :phone_number, birth_date
     
 
-    def initialize(first_name:, name:, patronymic:, id:, telegram:, phone_number: nil, email: nil, git:)
+    def initialize(first_name:, name:, patronymic:, id:, telegram: nil, phone_number: nil, email: nil, git: nil, birth_date:)
         self.set_contacts(email: email, telegram: telegram, phone_number: phone_number)
 		super(first_name: first_name, name: name, patronymic: patronymic, git: git, id: id, contact: contact)
+		self.birth_date = birth_date if birth_date
     end
 
 
@@ -47,6 +48,17 @@ class Student < Person
         email.nil? || email =~ /^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     end
 	
+	def self.valid_birth_date?(date)
+		Date.parse(date) rescue false
+	end
+	
+	def birth_date=(date)
+		if date.nil? || self.class.valid_birth_date?(date)
+			@birth_date = date
+		else
+			raise ArgumentError, "Некорректная дата рождения"
+		end
+	end
 	
 	def to_s
 		details = []
@@ -54,11 +66,12 @@ class Student < Person
 		details << "Phone: #{@phone_number}" if @phone_number
 		details << "Telegramm: #{@telegram}" if @telegram
 		details << "Mail: #{@email}" if @email
+		details << "Birth date: #{@birth_date}" if @birth_date
 		details.join("\n")
 	end
-	
+  
 	def get_info
-        "#{get_full_name}, git: #{self.git}, #{self.contact}"
+        "#{get_full_name}, git: #{self.git}, #{get_contact}"
     end
     
 	def set_contacts(contacts)
