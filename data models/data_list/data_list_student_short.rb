@@ -1,5 +1,6 @@
 require_relative 'data_list.rb'
 class DataListStudentShort < DataList
+	private
 	def base_names
         ["name", "git", "contacts"]
     end

@@ -42,7 +42,7 @@ class Data_list
         @data = data
     end
 
-    protected
+    private
     
     attr_reader :data
     attr_accessor :selected
