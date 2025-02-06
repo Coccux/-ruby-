@@ -21,11 +21,29 @@ class DataList
 		DataTable.new(dt)
 	end
 	def get_names
-		raise NotImplementedError, 'get_names must be implemented in a subclass'
+		column_names = ['№'] 
+        base_names.each do |name| 
+            column_names << name
+        end
+        column_names
 	end
 	def get_data
-		raise NotImplementedError, 'get_data must be implemented in a subclass'
+		data_table = [get_names]  
+        data.each_with_index do |item, index|
+            data_table << build_row(item, index)
+        end
+        Data_table.new(data_table)
 	end
+	
+	def base_names
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end    
+	
+    
+    def build_row(item, index)
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end
+	
 	protected
 	attr_accessor :selected
 end
