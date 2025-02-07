@@ -1,7 +1,9 @@
-require "./student.rb"
-require "./student_short.rb"
-require "./student_binary_tree.rb"
-
+require "./models/student/student.rb"
+require "./models/student_short/student_short.rb"
+require "./models/binary_tree/student_binary_tree.rb"
+require "./models/students_list/students_list_json.rb"
+require "./models/students_list/students_list_yaml.rb"
+require "date"
 
 require "./models/data_list_student_short.rb"
 

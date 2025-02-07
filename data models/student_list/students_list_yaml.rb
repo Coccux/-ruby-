@@ -1,20 +1,21 @@
-require 'json'
+require 'yaml'
 require_relative '../student/student.rb'
 require_relative '../student_short/student_short.rb'
 require_relative '../data_list/data_list_student_short.rb'
-class Students_list_JSON
+
+class Students_list_YAML
     def initialize(file_path)
         self.file_path = file_path
         self.students = []
         
         unless File.exist?(file_path)
-            File.write(file_path, [].to_json)
+            File.write(file_path, [].to_yaml)
         end
     end    
     
     def read
         content = File.read(file_path)
-        student_hashes = JSON.parse(content, symbolize_names: true)
+        student_hashes = YAML.safe_load(content, symbolize_names: true, permitted_classes: [Date, Symbol])
         self.students = student_hashes.map do |student_hash|
             Student.new(**student_hash)
         end
@@ -22,19 +23,22 @@ class Students_list_JSON
     
     def write
         content = students.map{|student| student.to_h}
-        File.write(file_path, JSON.pretty_generate(content))
+        File.write(file_path, content.to_yaml)
     end    
     
     def get_student_by_id(id)
         student = students.find { |student| student.id == id }
         raise "Студент с ID #{id} не найден" if student.nil?
+        student
     end
-	
+    
     def get_k_n_student_short_list(k, n, data_list = nil)
-		raise ArgumentError, 'k и n должны быть неотрицательными числами' unless k.is_a?(Integer) && n.is_a?(Integer) && k > 0 && n > 0
-		start = (k - 1) * n        
+        raise ArgumentError, 'k и n должны быть неотрицательными числами' unless k.is_a?(Integer) && n.is_a?(Integer) && k > 0 && n > 0
+        
+        start = (k - 1) * n
+        
         selected_students = students[start, n] || []
-       
+        
         student_short_list = selected_students.map { |student| Student_short.new(student: student) }
         data_list ||= Data_list_student_short.new(student_short_list)
         data_list
@@ -72,7 +76,7 @@ class Students_list_JSON
     
     def get_student_short_count
         students.size
-    end
+    end 
     private
     attr_accessor :file_path, :students
 end
