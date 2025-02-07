@@ -1,5 +1,6 @@
 require 'dotenv/load'
 require 'pg'
+require './models/student/student.rb'
 host = ENV['DB_HOST']
 port = ENV['DB_PORT']
 dbname = ENV['DB_NAME']
@@ -15,10 +16,10 @@ begin
         password: password
     )
 
-    result = connection.exec("SELECT * FROM student;") 
+    result = connection.exec("SELECT * FROM student;")
 
     result.each do |row|
-        puts row
+        puts Student.new_from_hash(row).initials
     end
 ensure
 

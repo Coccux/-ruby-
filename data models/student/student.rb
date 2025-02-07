@@ -13,6 +13,10 @@ class Student < Person
 		set_contacts(email:email, telegram:telegram, phone_number:phone_number)
 	end
 	
+	def self.new_from_hash(hash)
+		self.new(**hash.transform_keys(&:to_sym))
+	end
+	
 	attr_reader :surname, :firstname, :lastname, :phone_number, :telegram, :email, :git, :date_of_birth
 
 	def surname=(val)
@@ -40,8 +44,11 @@ class Student < Person
 	end
 
 	def id=(val)
-		if self.class.valid_id?(val)
-			@id = val 
+		if val.is_a?(String)
+				@id = val.to_i
+			else
+				@id = val
+			end
 		else
 			raise ArgumentError, "Некорректный ID"
 		end
