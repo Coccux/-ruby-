@@ -48,8 +48,11 @@ class Student < Person
 	end
 
 	def date_of_birth=(val)
-		if self.class.valid_date_of_birth?(val)
-			@date_of_birth = val
+		if val.is_a?(String)
+				@date_of_birth = Date.parse(val)
+			else
+				@date_of_birth = val
+			end
 		else
 			raise ArgumentError, "Некорректная дата рождения"
 		end

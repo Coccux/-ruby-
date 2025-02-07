@@ -52,3 +52,39 @@ table = student_short_list.get_data
 (0..3).each do |index|
     puts "#{table.get_element(index, 0)}, #{table.get_element(index, 1)}, #{table.get_element(index, 2)}, #{table.get_element(index, 3)}"
 end
+
+students_list = Students_list_JSON.new('students.json')
+students_list.read
+students_list.sort_by_initials
+puts "Отсортированные студенты в students_list, начиная со второго:"
+data_list = students_list.get_k_n_student_short_list(1, 2)
+data = data_list.get_data
+(0..data.row_count - 1).each do |index|
+    puts "#{data.get_element(index, 0)}, #{data.get_element(index, 1)}, #{data.get_element(index, 2)}, #{data.get_element(index, 3)}"   
+end
+
+test_student = Student.new(surname:"Серый", firstname:"Максим", lastname:"Андреевич", phone_number: "89182297016")
+puts "Добавление нового студента:"
+students_list.add_student(test_student)
+students_list.sort_by_initials
+data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data = data_list.get_data
+(0..data.row_count - 1).each do |index|
+    puts "#{data.get_element(index, 0)}, #{data.get_element(index, 1)}, #{data.get_element(index, 2)}, #{data.get_element(index, 3)}"   
+end
+
+puts "\nУдаление студента по id 4:"
+students_list.delete_student_by_id(4)
+data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data = data_list.get_data
+(0..data.row_count - 1).each do |index|
+    puts "#{data.get_element(index, 0)}, #{data.get_element(index, 1)}, #{data.get_element(index, 2)}, #{data.get_element(index, 3)}"   
+end
+
+puts "\nЗамена студента с id 3:"
+students_list.replace_student_by_id(3, test_student)
+data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data = data_list.get_data
+(0..data.row_count - 1).each do |index|
+    puts "#{data.get_element(index, 0)}, #{data.get_element(index, 1)}, #{data.get_element(index, 2)}, #{data.get_element(index, 3)}"   
+end
