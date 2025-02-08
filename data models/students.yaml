@@ -8,6 +8,7 @@
   :email:
   :phone_number: '88005553535'
   :git: https://github.com/ivan
+  
 - :id: 2
   :surname: Пупкин 
   :firstname: Никита
@@ -17,6 +18,7 @@
   :email:
   :phone_number: '89181112233'
   :git: pupkin
+  
 - :id: 3
   :surname: Сидоров
   :firstname: Сергей 
@@ -26,3 +28,213 @@
   :email:
   :phone_number: '89889998877'
   :git:
+  
+  - :id: 4
+  :surname: Петров
+  :firstname: Алексей
+  :lastname: Петрович
+  :date_of_birth: 2003-07-21
+  :telegram: "@AlexPetrov"
+  :email: alex.petrov@example.com
+  :phone_number: '89174445566'
+  :git: https://github.com/alexpetrov
+
+- :id: 5
+  :surname: Смирнов
+  :firstname: Дмитрий
+  :lastname: Иванович
+  :date_of_birth: 2002-09-12
+  :telegram: "@DmitrySmirnov"
+  :email: dmitry.smirnov@example.com
+  :phone_number: '89174445567'
+  :git: https://github.com/dmitrysmirnov
+
+- :id: 6
+  :surname: Кузнецова
+  :firstname: Анна
+  :lastname: Сергеевна
+  :date_of_birth: 2004-05-03
+  :telegram: "@AnnaKuznetsova"
+  :email: anna.kuznetsova@example.com
+  :phone_number: '89174445568'
+  :git: https://github.com/annakuznetsova
+
+- :id: 7
+  :surname: Васильев
+  :firstname: Игорь
+  :lastname: Викторович
+  :date_of_birth: 2001-11-28
+  :telegram: "@IgorVasilev"
+  :email: igor.vasilev@example.com
+  :phone_number: '89174445569'
+  :git: https://github.com/igorvasilev
+
+- :id: 8
+  :surname: Соколов
+  :firstname: Максим
+  :lastname: Александрович
+  :date_of_birth: 2005-02-18
+  :telegram: "@MaximSokolov"
+  :email: maxim.sokolov@example.com
+  :phone_number: '89174445570'
+  :git: https://github.com/maximsokolov
+
+- :id: 9
+  :surname: Попов
+  :firstname: Евгений
+  :lastname: Дмитриевич
+  :date_of_birth: 2003-08-14
+  :telegram: "@EvgenyPopov"
+  :email: evgeny.popov@example.com
+  :phone_number: '89174445571'
+  :git: https://github.com/evgenypopov
+
+- :id: 10
+  :surname: Лебедев
+  :firstname: Сергей
+  :lastname: Игоревич
+  :date_of_birth: 2000-04-09
+  :telegram: "@SergeyLebedev"
+  :email: sergey.lebedev@example.com
+  :phone_number: '89174445572'
+  :git: https://github.com/sergeylebedev
+
+- :id: 11
+  :surname: Новиков
+  :firstname: Андрей
+  :lastname: Викторович
+  :date_of_birth: 2002-06-25
+  :telegram: "@AndreyNovikov"
+  :email: andrey.novikov@example.com
+  :phone_number: '89174445573'
+  :git: https://github.com/andreynovikov
+
+- :id: 12
+  :surname: Морозов
+  :firstname: Виктор
+  :lastname: Сергеевич
+  :date_of_birth: 2004-03-17
+  :telegram: "@ViktorMorozov"
+  :email: viktor.morozov@example.com
+  :phone_number: '89174445574'
+  :git: https://github.com/viktororozov
+
+- :id: 13
+  :surname: Федоров
+  :firstname: Антон
+  :lastname: Александрович
+  :date_of_birth: 2001-10-05
+  :telegram: "@AntonFedorov"
+  :email: anton.fedorov@example.com
+  :phone_number: '89174445575'
+  :git: https://github.com/antonfedorov
+
+- :id: 14
+  :surname: Волков
+  :firstname: Илья
+  :lastname: Иванович
+  :date_of_birth: 2003-12-11
+  :telegram: "@IlyaVolkov"
+  :email: ilya.volkov@example.com
+  :phone_number: '89174445576'
+  :git: https://github.com/ilyavolkov
+
+- :id: 15
+  :surname: Алексеева
+  :firstname: Екатерина
+  :lastname: Дмитриевна
+  :date_of_birth: 2005-07-07
+  :telegram: "@EkaterinaAlekseeva"
+  :email: ekaterina.alekseeva@example.com
+  :phone_number: '89174445577'
+  :git: https://github.com/ekaterinaalekseeva
+
+- :id: 16
+  :surname: Кузьмин
+  :firstname: Роман
+  :lastname: Викторович
+  :date_of_birth: 2002-09-20
+  :telegram: "@RomanKuzmin"
+  :email: roman.kuzmin@example.com
+  :phone_number: '89174445578'
+  :git: https://github.com/romankuzmin
+
+- :id: 17
+  :surname: Захаров
+  :firstname: Владимир
+  :lastname: Александрович
+  :date_of_birth: 2004-05-13
+  :telegram: "@VladimirZakharov"
+  :email: vladimir.zakharov@example.com
+  :phone_number: '89174445579'
+  :git: https://github.com/vladimirzakharov
+
+- :id: 18
+  :surname: Сорокина
+  :firstname: Ольга
+  :lastname: Сергеевна
+  :date_of_birth: 2003-11-29
+  :telegram: "@OlgaSorokina"
+  :email: olga.sorokina@example.com
+  :phone_number: '89174445580'
+  :git: https://github.com/olgasorokina
+
+- :id: 19
+  :surname: Ефимов
+  :firstname: Павел
+  :lastname: Игоревич
+  :date_of_birth: 2001-08-08
+  :telegram: "@PavelEfimov"
+  :email: pavel.efimov@example.com
+  :phone_number: '89174445581'
+  :git: https://github.com/pavelefimov
+
+- :id: 20
+  :surname: Киселев
+  :firstname: Михаил
+  :lastname: Дмитриевич
+  :date_of_birth: 2005-01-19
+  :telegram: "@MikhailKiselev"
+  :email: mikhail.kiselev@example.com
+  :phone_number: '89174445582'
+  :git: https://github.com/mikhailkiselev
+
+- :id: 21
+  :surname: Орлов
+  :firstname: Денис
+  :lastname: Викторович
+  :date_of_birth: 2003-04-04
+  :telegram: "@DenisOrlov"
+  :email: denis.orlov@example.com
+  :phone_number: '89174445583'
+  :git: https://github.com/denisorlov
+
+- :id: 22
+  :surname: Белов
+  :firstname: Артём
+  :lastname: Александрович
+  :date_of_birth: 2002-12-15
+  :telegram: "@ArtemBelov"
+  :email: artem.belov@example.com
+  :phone_number: '89174445584'
+  :git: https://github.com/artembelov
+
+- :id: 23
+  :surname: Григорьев
+  :firstname: Кирилл
+  :lastname: Сергеевич
+  :date_of_birth: 2004-06-22
+  :telegram: "@KirillGrigoriev"
+  :email: kirill.grigoriev@example.com
+  :phone_number: '89174445585'
+  :git: https://github.com/kirillgrigoriev
+
+- :id: 24
+  :surname: Лазарева
+  :firstname: Юлия
+  :lastname: Игоревна
+  :date_of_birth: 2005-03-08
+  :telegram: "@YuliaLazareva"
+  :email: yulia.lazareva@example.com
+  :phone_number: '89174445586'
+  :git: https://github.com/yulialazareva
