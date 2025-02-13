@@ -11,9 +11,9 @@ class DataTable
 	def rows_count
 		@data.size
 	end
-	def columns_count
-		@data.empty? ? 0 : @data[0].size
-	end
+	def column_count
+        self.data.empty? ? 0 : self.data[0].size
+    end
 	attr_reader :data
 	private
 	def valid_index?(row, col)

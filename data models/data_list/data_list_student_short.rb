@@ -1,4 +1,6 @@
 require_relative 'data_list.rb'
+require_relative "../data_table/data_table.rb"
+require_relative "../student_short/student_short.rb"
 class DataListStudentShort < DataList
 	private
 	def base_names
