@@ -1,5 +1,5 @@
 require_relative "./student_binary_tree_node.rb"
-require "./models/student/student.rb"
+require_relative "../student/student.rb"
 
 class Student_binary_tree
 	include Enumerable
@@ -10,7 +10,7 @@ class Student_binary_tree
 		@root = nil
 	end
 
-	# Добавление нового элемента к дереву
+	
 	def insert(element)
 		if @root.nil?
 			@root = Tree_node.new(element)
@@ -19,14 +19,12 @@ class Student_binary_tree
 		end
 	end
 
-	# Переопределение each для Enumerable
 	def each(&block)
 		dfs(@root, &block)
 	end
 
 	private
 
-	# Рекурсивный обход в глубину
 	def dfs(node, &block)
 		return if node.nil?
 
@@ -35,7 +33,6 @@ class Student_binary_tree
 		dfs(node.right, &block)
 	end
 
-	# Добавление нового элемента к указанному узлу
 	def insert_node(node, element)
 		if element < node.element
 			if node.left.nil?
