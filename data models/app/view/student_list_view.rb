@@ -1,9 +1,4 @@
 require 'fox16'
-require '../models/students_list/students_list_db.rb'
-require '../models/students_list/students_list_file.rb'
-require '../models/students_list/students_list.rb'
-require '../models/students_list_strategy/students_list_strategy_json.rb'
-require '../models/students_list_strategy/students_list_strategy_yaml.rb'
 include Fox
 
 class StudentListView < FXMainWindow
@@ -122,12 +117,10 @@ class StudentListView < FXMainWindow
             update_table
         end
 
-      
         self.table.connect(SEL_CHANGED) do
             update_buttons_state
         end
 
-        
         update_buttons_state
     end
     
@@ -142,18 +135,15 @@ class StudentListView < FXMainWindow
         total_pages = (self.data.row_count.to_f / self.items_per_page).ceil
         self.page_label.text = "Страница #{self.current_page} из #{total_pages}"
       
-        
         start_idx = (self.current_page - 1) * self.items_per_page
         end_idx = [start_idx + self.items_per_page - 1, self.data.row_count - 1].min
       
-        
         data_for_page = (start_idx..end_idx).map do |row_idx|
             (0...self.data.column_count).map do |col_idx|
                 self.data.get_element(row_idx, col_idx)
             end
         end
       
-        
         row_count = data_for_page.length
         column_count = self.data.column_count
       
@@ -223,7 +213,6 @@ class StudentListView < FXMainWindow
     end
 
     def create_entry
-        
     end
     
     def update_entry
