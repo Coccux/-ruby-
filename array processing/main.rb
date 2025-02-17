@@ -5,6 +5,7 @@ puts "1 - Найти уникальный элемент"
 puts "2 - Найти два наименьших элемента"
 puts "3 - Найти элемент, ближайший к R"
 puts "4 - Найти список положительных делителей"
+puts "5 - Найти квадраты частовстречающихся чисел"
 
 choice = gets.to_i
 
@@ -34,4 +35,12 @@ when 4
   number = gets.to_i
   result = ArrayProcessor.new(array: (1..number).to_a).filter_map { |i| i if number % i == 0 }
   puts "Положительные делители числа #{number}: #{result}"
+  
+  when 5 
+  result = array_processor.inject(Hash.new(0)) do |acc, el|
+    acc[el] += 1
+    acc
+  end
+  squares = result.select { |_, count| count > 1 }.keys.map { |x| x**2 }
+  puts "Квадраты часто встречающихся чисел: #{squares}"
 end
