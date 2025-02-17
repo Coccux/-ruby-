@@ -4,6 +4,8 @@ class Data_list
         self.data = data
         self.selected = []
 		self.offset = offset
+		self.observers = []
+        self.count = 0
     end
 
     
@@ -49,11 +51,23 @@ class Data_list
         end
         @offset = offset
     end
-
+	
+	def notify
+        return if observers.nil?
+        observers.each do |observer|
+            observer.set_table_params(self.get_names, self.count)
+            observer.set_table_data(self.get_data)
+        end
+    end
+    def add_observer(observer)
+        self.observers << observer
+    end
+    attr_accessor :count
+	
     private
     
     attr_reader :data, :offset
-    attr_accessor :selected
+    attr_accessor :selected, :observers
 
     def base_names
         raise NotImplementedError, 'Метод не реализован в данном классе'
