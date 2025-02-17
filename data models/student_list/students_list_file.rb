@@ -57,7 +57,7 @@ class Students_list_file
         new_id = students.empty? ? 1 : students.max_by(&:id).id + 1 
         student.id = new_id
         self.students << student
-        write
+        
     end
 
     def replace_student_by_id(id, new_student)
@@ -67,7 +67,7 @@ class Students_list_file
         end
         students[student_index] = new_student
         new_student.id = id
-        write
+        
     end
 
     def delete_student_by_id(id)
@@ -76,8 +76,7 @@ class Students_list_file
             raise "Студент с ID #{id} не найден"
         end
         students.delete_at(student_index)
-        write
-        write
+        
     end
 
     def get_student_short_count

@@ -13,12 +13,15 @@ class Students_list_file_adapter < Students_list_interface
     end
     def add_student(student)
         self.adaptee.add_student(student)
+		self.adaptee.write
     end
     def replace_student_by_id(id, new_student)
         self.adaptee.replace_student_by_id(id, new_student)
+		self.adaptee.write
     end
     def delete_student_by_id(id)
         self.adaptee.delete_student_by_id(id)
+		self.adaptee.write
     end
     
     def get_student_short_count
